@@ -8,10 +8,10 @@ export function AuthLayout() {
       <div className='h-full flex flex-col justify-between border-r border-foreground/5 bg-hero-pattern bg-no-repeat bg-cover bg-top object-cover p-10 text-muted-foreground'>
         <div className='flex items-center gap-3 text-lg text-foreground'>
           <HandCoins className='h-6 w-6'  color='black'/>
-          <span className='font-semibold text-black '>Sua Comanda</span>
+          <span className='font-semibold text-black '>yourFoodStore</span>
         </div>
         <footer className='text-sm text-black font-semibold'>
-          All rights reserved to: Sua Comanda® - {new Date().getFullYear()}
+          All rights reserved to: yourFoodStore® - {new Date().getFullYear()}
         </footer>
       </div>
 
