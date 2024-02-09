@@ -2,7 +2,7 @@ import { Home, ScrollText, Store } from 'lucide-react'
 import { Separator } from './ui/separator'
 import { NavLink } from './nav-link'
 import { ModeToggle } from './mode-toggle'
-import AccountMenu from './account-menu'
+import { AccountMenu } from './account-menu'
 
 export function Header() {
     return (

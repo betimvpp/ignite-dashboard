@@ -4,6 +4,8 @@ import { router } from './router/routes'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { Toaster } from 'sonner'
 import { ThemeProvider } from './components/theme-provider'
+import { QueryClientProvider } from '@tanstack/react-query'
+import { queryClient } from './lib/react-query'
 
 export function App() {
   return (
@@ -11,7 +13,9 @@ export function App() {
       <HelmetProvider>
         <Helmet titleTemplate='%s | Sua Comanda' />
         <Toaster richColors />
-        <RouterProvider router={router} />
+        <QueryClientProvider client={queryClient}>
+          <RouterProvider router={router} />
+        </QueryClientProvider>
       </HelmetProvider>
     </ThemeProvider>
   )

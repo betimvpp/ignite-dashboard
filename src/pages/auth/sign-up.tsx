@@ -1,9 +1,11 @@
+import { useMutation } from "@tanstack/react-query";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { z } from "zod";
 
+import { registerRestaurant } from "@/api/register-restaurant";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -11,8 +13,8 @@ import { Separator } from "@/components/ui/separator";
 
 const signUpForm = z.object({
   email: z.string().email(),
-  establishment: z.string(),
-  username: z.string(),
+  restaurantName: z.string(),
+  managerName: z.string(),
   phone: z.string(),
 })
 
@@ -22,12 +24,25 @@ export function SignUp() {
   const navigate = useNavigate()
   const { register, handleSubmit, formState: { isSubmitting }, reset } = useForm<SignUpForm>();
 
+  const { mutateAsync: registerRestaurantFn } = useMutation({
+    mutationFn: registerRestaurant
+  })
+
   async function handlesignUp(data: SignUpForm) {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 2000))
+      await registerRestaurantFn({
+        restaurantName: data.restaurantName,
+        managerName: data.managerName,
+        email: data.email,
+        phone: data.phone,
+      })
 
-      console.log(data)
-      toast.success("Enviamos um e-mail para concluir seu cadastro!")
+      toast.success('Restaurante cadastrado com sucesso!', {
+        action: {
+          label: 'Login',
+          onClick: () => navigate(`/sign-in?email=${data.email}`),
+        },
+      })
 
       reset()
       navigate('/sign-in')
@@ -51,7 +66,7 @@ export function SignUp() {
           <form className="space-y-4" onSubmit={handleSubmit(handlesignUp)}>
             <div className="space-y-2">
               <Label htmlFor="username">Seu nome de usuário:</Label>
-              <Input id="username" type="username" {...register('username')} />
+              <Input id="username" type="username" {...register('managerName')} />
             </div>
             <div className="space-y-2">
               <Label htmlFor="email">Seu e-mail</Label>
@@ -63,7 +78,7 @@ export function SignUp() {
             </div>
             <div className="space-y-2">
               <Label htmlFor="establishment">Nome do seu estabelecimento:</Label>
-              <Input id="establishment" type="establishment" {...register('establishment')} />
+              <Input id="establishment" type="establishment" {...register('restaurantName')} />
             </div>
 
             <Button className="w-full" disabled={isSubmitting}>Finalizar cadastro</Button>

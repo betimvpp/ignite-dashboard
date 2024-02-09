@@ -1,14 +1,20 @@
 import { SearchX } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import { Link, useRouteError } from 'react-router-dom'
 
 export function NotFound() {
+  const error = useRouteError() as Error 
+
   return (
-    <div className="flex h-screen flex-col items-center justify-center gap-2">
-      <SearchX className='w-20 h-20'/>
-      <h1 className="text-4xl font-bold">Página não encontrada</h1>
+    <div className="flex h-screen flex-col items-center justify-center gap-2 p-6">
+      <SearchX className='h-20 w-20'/>
+      <h1 className="text-4xl font-bold">Whoops, algo aconteceu...</h1>
+      <p className="text-accent-foreground">
+        Um erro aconteceu na aplicação, abaixo você encontra mais detalhes:
+      </p>
+      <pre>{error?.message || JSON.stringify(error)}</pre>
       <p className="text-accent-foreground">
         Voltar para o{' '}
-        <Link to="/" className="text-secondary dark:text-primary">
+        <Link to="/" className="text-sky-600 dark:text-sky-400">
           Dashboard
         </Link>
       </p>
