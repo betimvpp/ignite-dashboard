@@ -61,7 +61,7 @@ export function SignIn() {
           <Separator />
 
           <div className="text-center space-y-2">
-            <p className="text-sm text-muted-foreground">Ou clique para seguir à página de cadastro!</p>
+            <p className="text-sm text-muted-foreground">Ou clique para seguir para a página de cadastro!</p>
             <Button variant="link" asChild >
               <Link to="/sign-up" className="text-primary hover:text-primary/90 hover:no-underline">Cadastrar-se</Link>
             </Button>

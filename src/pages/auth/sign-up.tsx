@@ -37,7 +37,7 @@ export function SignUp() {
         phone: data.phone,
       })
 
-      toast.success('Restaurante cadastrado com sucesso!', {
+      toast.success('Estabelecimento cadastrado com sucesso!', {
         action: {
           label: 'Login',
           onClick: () => navigate(`/sign-in?email=${data.email}`),
@@ -69,7 +69,7 @@ export function SignUp() {
               <Input id="username" type="username" {...register('managerName')} />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="email">Seu e-mail</Label>
+              <Label htmlFor="email">Seu e-mail:</Label>
               <Input id="email" type="email" {...register('email')} />
             </div>
             <div className="space-y-2">
@@ -77,7 +77,7 @@ export function SignUp() {
               <Input id="phone" type="phone" {...register('phone')} />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="establishment">Nome do seu estabelecimento:</Label>
+              <Label htmlFor="establishment">Nome do estabelecimento:</Label>
               <Input id="establishment" type="establishment" {...register('restaurantName')} />
             </div>
 

@@ -26,7 +26,7 @@ interface OrderTableRowProps {
     }
 }
 
-export default function OrderTableRow({ order }: OrderTableRowProps) {
+export function OrderTableRow({ order }: OrderTableRowProps) {
     const [isDetailsOpen, setIsDetailsOpen] = useState(false);
     const queryClient = useQueryClient()
 
