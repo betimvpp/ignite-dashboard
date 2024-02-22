@@ -1,7 +1,7 @@
 import { render } from "@testing-library/react"
 import userEvent from '@testing-library/user-event'
 
-import Pagination from "./pagination"
+import { Pagination } from "./pagination"
 
 const onPageChangeCallback = vi.fn()
 

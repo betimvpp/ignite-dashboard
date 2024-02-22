@@ -165,18 +165,20 @@ export function OrderTableRow({ order }: OrderTableRowProps) {
                 )}
             </TableCell>
             <TableCell>
-                <Button
-                    disabled={
-                        !['pending', 'processing'].includes(order.status) ||
-                        isCancelingOrder
-                    }
-                    onClick={() => cancelOrderFn({ orderId: order.orderId })}
-                    variant="destructive"
-                    size="xs"
-                >
-                    <X className="mr-2 h-3 w-3" />
-                    Cancelar
-                </Button>
+                {(order.status === 'pending' || order.status === 'processing') && (
+                    <Button
+                        disabled={
+                            !['pending', 'processing'].includes(order.status) ||
+                            isCancelingOrder
+                        }
+                        onClick={() => cancelOrderFn({ orderId: order.orderId })}
+                        variant="destructive"
+                        size="xs"
+                    >
+                        <X className="mr-2 h-3 w-3" />
+                        Cancelar
+                    </Button>
+                )}
             </TableCell>
         </TableRow >
     )

@@ -1,4 +1,4 @@
-import { Home, ScrollText, Store } from 'lucide-react'
+import { Contact, Contact2, Home, PackageSearch, ScrollText, Store } from 'lucide-react'
 import { Separator } from './ui/separator'
 import { NavLink } from './nav-link'
 import { ModeToggle } from './mode-toggle'
@@ -21,6 +21,16 @@ export function Header() {
                     <NavLink to="/orders" >
                         <ScrollText className='h-4 w-4' />
                         Pedidos
+                    </NavLink>
+
+                    <NavLink to="/products" >
+                        <PackageSearch className='h-4 w-4' />
+                        Produtos
+                    </NavLink>
+
+                    <NavLink to="/employees" >
+                        <Contact2 className='h-4 w-4' />
+                        Funcionários
                     </NavLink>
                 </nav>
 
