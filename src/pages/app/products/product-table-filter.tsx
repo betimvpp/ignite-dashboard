@@ -115,13 +115,11 @@ export function ProductTableFilters() {
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">Todas as categorias</SelectItem>
-                <SelectItem value="pending">Cerveja</SelectItem>
-                <SelectItem value="canceled">Whisky</SelectItem>
-                <SelectItem value="processing">Vodka</SelectItem>
-                <SelectItem value="delivering">Vinho</SelectItem>
-                <SelectItem value="delivering">Cachaça</SelectItem>
-                <SelectItem value="delivered">Petisco</SelectItem>
-                <SelectItem value="delivered">Porções</SelectItem>
+                <SelectItem value="Cerveja">Cerveja</SelectItem>
+                <SelectItem value="Petisco">Petisco</SelectItem>
+                <SelectItem value="Aperitivo">Aperitivo</SelectItem>
+                <SelectItem value="Porções">Porções</SelectItem>
+                <SelectItem value="Drink">Drink</SelectItem>
               </SelectContent>
             </Select>
           )

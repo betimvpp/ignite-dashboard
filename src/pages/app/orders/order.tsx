@@ -79,7 +79,7 @@ export default function Order() {
               </TableBody>
             </Table>
           </div>
-          {isLoadingOrders && <OrderTableSkeleton />}
+          {isLoadingOrders === true && <OrderTableSkeleton />}
 
           {result && (
             <Pagination

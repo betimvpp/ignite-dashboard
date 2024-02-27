@@ -1,12 +1,14 @@
 import { Pagination } from "@/components/pagination";
 import { Table, TableBody, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Helmet } from "react-helmet-async";
-import result from "postcss/lib/result";
-import { OrderTableRow } from "../orders/order-table-row";
-import { OrderTableSkeleton } from "../orders/order-table-skeletorn";
+
 import { EmployeeTableFilters } from "./employees-table-filter";
+import { useSearchParams } from "react-router-dom";
+import { z } from "zod";
+import { useQuery } from "@tanstack/react-query";
 
 export function Employees() {
+  
   return (
     <>
       <Helmet title="Produtos" />
@@ -28,21 +30,21 @@ export function Employees() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {/* {result &&
-                  result.orders.map((order) => {
-                    return <OrderTableRow key={order.orderId} order={order} />
-                  })} */}
+                {result &&
+                  result.products.map((product: any) => {
+                    return <OrderTableRow key={product.productId} order={product} />
+                  })}
               </TableBody>
             </Table>
           </div>
-          {/* {isLoadingOrders && <OrderTableSkeleton />} */}
+          {isLoadingOrders && <OrderTableSkeleton />}
 
           {result && (
             <Pagination
-              onPageChange={() => console.log("mudou")}
-              pageIndex={0}
-              totalCount={105}
-              perPage={10}
+              onPageChange={handlePaginate}
+              pageIndex={result.meta.pageIndex}
+              totalCount={result.meta.totalCount}
+              perPage={result.meta.perPage}
             />
           )}
         </div>
