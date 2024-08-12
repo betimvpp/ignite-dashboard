@@ -1,4 +1,4 @@
-import { Contact, Contact2, Home, PackageSearch, ScrollText, Store } from 'lucide-react'
+import { Contact2, Home, PackageSearch, ScrollText, Store } from 'lucide-react'
 import { Separator } from './ui/separator'
 import { NavLink } from './nav-link'
 import { ModeToggle } from './mode-toggle'

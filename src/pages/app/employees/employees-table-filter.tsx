@@ -17,7 +17,7 @@ import {
 const employeeFiltersSchema = z.object({
   employeeId: z.string().optional(),
   employeeName: z.string().optional(),
-  category: z.string().optional(),
+  status: z.string().optional(),
 })
 
 type EmployeeFiltersSchema = z.infer<typeof employeeFiltersSchema>
@@ -25,21 +25,22 @@ type EmployeeFiltersSchema = z.infer<typeof employeeFiltersSchema>
 export function EmployeeTableFilters() {
   const [searchParams, setSearchParams] = useSearchParams()
 
-  const employeeId = searchParams.get('employeeId')
-  const employeeName = searchParams.get('employeeName')
-  const category = searchParams.get('category')
+  const employeeId = searchParams.get('employeeId') || ''
+  const employeeName = searchParams.get('employeeName') || ''
+  const status = searchParams.get('status') || 'all'
 
   const { register, handleSubmit, control, reset } =
     useForm<EmployeeFiltersSchema>({
       resolver: zodResolver(employeeFiltersSchema),
       defaultValues: {
-        employeeId: employeeId ?? '',
-        employeeName: employeeName ?? '',
-        category: category ?? 'all',
+        employeeId,
+        employeeName,
+        status,
       },
     })
 
-  function handleFilter({ employeeName, employeeId, category }: EmployeeFiltersSchema) {
+  function handleFilter(data: EmployeeFiltersSchema) {
+    const { employeeId, employeeName, status } = data
     setSearchParams((state) => {
       if (employeeId) {
         state.set('employeeId', employeeId)
@@ -48,18 +49,18 @@ export function EmployeeTableFilters() {
       }
 
       if (employeeName) {
-        state.set('customerName', employeeName)
+        state.set('employeeName', employeeName)
       } else {
-        state.delete('customerName')
+        state.delete('employeeName')
       }
 
-      if (category) {
-        state.set('category', category)
+      if (status) {
+        state.set('status', status)
       } else {
-        state.delete('category')
+        state.delete('status')
       }
 
-      state.set('page', '1')
+      state.set('pageIndex', '0') // Reset to the first page
 
       return state
     })
@@ -69,8 +70,8 @@ export function EmployeeTableFilters() {
     setSearchParams((state) => {
       state.delete('employeeId')
       state.delete('employeeName')
-      state.delete('category')
-      state.set('page', '1')
+      state.delete('status')
+      state.set('pageIndex', '0') // Reset to the first page
 
       return state
     })
@@ -78,7 +79,7 @@ export function EmployeeTableFilters() {
     reset({
       employeeId: '',
       employeeName: '',
-      category: 'all',
+      status: 'all',
     })
   }
 
@@ -97,6 +98,30 @@ export function EmployeeTableFilters() {
         placeholder="Nome do funcionário"
         className="h-8 w-[320px]"
         {...register('employeeName')}
+      />
+      <Controller
+        name="status"
+        control={control}
+        render={({ field: { name, onChange, value, disabled } }) => {
+          return (
+            <Select
+              defaultValue="all"
+              name={name}
+              onValueChange={onChange}
+              value={value}
+              disabled={disabled}
+            >
+              <SelectTrigger className="h-8 w-[180px]">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">Todos os status</SelectItem>
+                <SelectItem value="ativo">Ativo</SelectItem>
+                <SelectItem value="inativo">Inativo</SelectItem>
+              </SelectContent>
+            </Select>
+          )
+        }}
       />
       <Button variant="secondary" size="xs" type="submit">
         <Search className="mr-2 h-4 w-4" />

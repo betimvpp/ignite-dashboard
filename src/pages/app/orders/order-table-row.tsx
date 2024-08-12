@@ -164,6 +164,7 @@ export function OrderTableRow({ order }: OrderTableRowProps) {
                     </Button>
                 )}
             </TableCell>
+            
             <TableCell>
                 {(order.status === 'pending' || order.status === 'processing') && (
                     <Button
